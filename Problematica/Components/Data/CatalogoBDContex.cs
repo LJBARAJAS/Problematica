@@ -9,5 +9,7 @@ namespace Problematica.Components.Data
             
         }
         public DbSet<Empleado> Empleados { get; set; }
+        public DbSet<Empresa> Empresas { get; set; }
+        public DbSet<Puesto> Puestos { get; set; }
     }
 }

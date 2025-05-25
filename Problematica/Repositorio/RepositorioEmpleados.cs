@@ -25,12 +25,20 @@ namespace Problematica.Repositorio
 
         public async Task<Empleado> Get(int id)
         {
-            return await _context.Empleados.FindAsync(id);
+            return await _context.Empleados.FindAsync(id) ?? new Empleado();
         }
 
         public async Task<List<Empleado>> GetAll()
         {
             return await _context.Empleados.ToListAsync();
+        }
+        public async Task<List<Empresa>> GetEmpresas()
+        {
+            return await _context.Empresas.ToListAsync();
+        }
+        public async Task<List<Puesto>> GetPuestos()
+        {
+            return await _context.Puestos.ToListAsync();
         }
 
         public async Task Update(Empleado empleado)
@@ -38,5 +46,7 @@ namespace Problematica.Repositorio
             _context.Entry(empleado).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
+
+
     }
 }

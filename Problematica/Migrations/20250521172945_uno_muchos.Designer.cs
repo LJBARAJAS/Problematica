@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Problematica.Components.Data;
 
@@ -10,9 +11,11 @@ using Problematica.Components.Data;
 namespace Problematica.Migrations
 {
     [DbContext(typeof(CatalogoBDContex))]
-    partial class CatalogoBDContexModelSnapshot : ModelSnapshot
+    [Migration("20250521172945_uno_muchos")]
+    partial class uno_muchos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,7 +36,7 @@ namespace Problematica.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EmpresaId")
+                    b.Property<int>("EmpresasID")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
@@ -44,19 +47,14 @@ namespace Problematica.Migrations
                     b.Property<int>("NumEmpleado")
                         .HasColumnType("int");
 
-                    b.Property<int>("PuestoId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("EmpresaId");
-
-                    b.HasIndex("PuestoId");
+                    b.HasIndex("EmpresasID");
 
                     b.ToTable("Empleados");
                 });
 
-            modelBuilder.Entity("Problematica.Components.Data.Empresa", b =>
+            modelBuilder.Entity("Problematica.Components.Data.Empresas", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -77,52 +75,18 @@ namespace Problematica.Migrations
                     b.ToTable("Empresas");
                 });
 
-            modelBuilder.Entity("Problematica.Components.Data.Puesto", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("NombreDelPuesto")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("SueldoBase")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Puestos");
-                });
-
             modelBuilder.Entity("Problematica.Components.Data.Empleado", b =>
                 {
-                    b.HasOne("Problematica.Components.Data.Empresa", "Empresa")
+                    b.HasOne("Problematica.Components.Data.Empresas", "Empresas")
                         .WithMany("Empleados")
-                        .HasForeignKey("EmpresaId")
+                        .HasForeignKey("EmpresasID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Problematica.Components.Data.Puesto", "Puesto")
-                        .WithMany("Empleados")
-                        .HasForeignKey("PuestoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Empresa");
-
-                    b.Navigation("Puesto");
+                    b.Navigation("Empresas");
                 });
 
-            modelBuilder.Entity("Problematica.Components.Data.Empresa", b =>
-                {
-                    b.Navigation("Empleados");
-                });
-
-            modelBuilder.Entity("Problematica.Components.Data.Puesto", b =>
+            modelBuilder.Entity("Problematica.Components.Data.Empresas", b =>
                 {
                     b.Navigation("Empleados");
                 });

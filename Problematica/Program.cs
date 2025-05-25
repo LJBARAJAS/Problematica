@@ -10,6 +10,8 @@ builder.Services.AddScoped<IRepositorioEmpleados, RepositorioEmpleados>();
 builder.Services.AddDbContext<CatalogoBDContex>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IRepositorioEmpleados, RepositorioEmpleados>();
+builder.Services.AddScoped<IRepositorioEmpresa, RepositorioEmpresa>();
+builder.Services.AddScoped<IRepositorioPuesto, RepositorioPuesto>();
 builder.Services.AddDbContext<CatalogoBDContex>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();

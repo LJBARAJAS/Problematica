@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Problematica.Components.Data;
 
@@ -10,9 +11,11 @@ using Problematica.Components.Data;
 namespace Problematica.Migrations
 {
     [DbContext(typeof(CatalogoBDContex))]
-    partial class CatalogoBDContexModelSnapshot : ModelSnapshot
+    [Migration("20250525005515_uno-mu")]
+    partial class unomu
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

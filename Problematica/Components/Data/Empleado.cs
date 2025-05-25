@@ -14,5 +14,9 @@ namespace Problematica.Components.Data
         public int? NumEmpleado { get; set; }
         [Required(ErrorMessage = "El departamento es obligatoria")]
         public string? Departamento { get; set; }
+        public int EmpresaId { get; set; }
+        virtual public Empresa? Empresa { get; set; }
+        public int PuestoId { get; set; }
+        virtual public Puesto? Puesto { get; set; }
     }
 }
